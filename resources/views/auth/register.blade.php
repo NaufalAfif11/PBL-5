@@ -77,8 +77,7 @@
 <div class="container">
     <div class="card">
         <h2>Registrasi</h2>
-        <form action="{{ route('register') }}" method="POST">
-            @csrf
+        <form action="{{ route('login') }}" method="GET">
             <div class="form-group">
                 <input type="text" name="name" placeholder="Nama Pengguna" required>
             </div>
@@ -90,6 +89,9 @@
             </div>
             <div class="form-group">
                 <input type="password" name="password" placeholder="Kata Sandi" required>
+            </div>
+            <div class="form-group">
+                <input type="password" name="password_confirmation" placeholder="Konfirmasi Kata Sandi" required>
             </div>
             <button type="submit" class="btn">Daftar</button>
         </form>

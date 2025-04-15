@@ -91,8 +91,8 @@
         <h2>Vaccine Schedule</h2>
         <h3>Masuk</h3>
 
-        <form method="POST" action="{{ route('login') }}">
-            @csrf
+        <!-- Arahkan ke dashboard -->
+        <form method="GET" action="{{ route('dashboard') }}">
             <input type="text" name="email" placeholder="Nama Pengguna" required>
             <input type="password" name="password" placeholder="Kata Sandi" required>
             <button type="submit">Masuk</button>

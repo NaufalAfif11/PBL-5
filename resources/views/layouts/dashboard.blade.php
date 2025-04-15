@@ -42,11 +42,11 @@
     <div class="sidebar text-center">
         <img src="{{ asset('images/logo.png') }}" alt="logo">
         <h5><strong>Vaccine Schedule</strong></h5>
-        <a href="#" class="active">Beranda</a>
-        <a href="#">Menu Vaksin</a>
-        <a href="#">Profil</a>
-        <a href="#">Notifikasi</a>
-        <a href="#">Riwayat</a>
+        <a href="{{ route('dashboard') }}" class="active">Beranda</a>
+        <a href="{{ route('menu-vaksin') }}">Tambah Vaksin</a>
+        <a href="{{ route('profil') }}">Profil</a>
+        <a href="{{ route('notifikasi') }}">Notifikasi</a>
+        <a href="{{ route('riwayat') }}">Riwayat</a>
         <a href="#">Keluar</a>
     </div>
     <div class="flex-grow-1 p-4">
