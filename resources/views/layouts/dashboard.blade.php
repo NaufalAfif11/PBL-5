@@ -23,12 +23,12 @@
             color: #000;
             margin-bottom: 15px;
             text-decoration: none;
+            padding: 8px;
+            border-radius: 5px;
         }
         .sidebar a.active {
             background-color: #ff4d4d;
             color: white;
-            padding: 8px;
-            border-radius: 5px;
         }
         .footer {
             text-align: center;
@@ -42,13 +42,19 @@
     <div class="sidebar text-center">
         <img src="{{ asset('images/logo.png') }}" alt="logo">
         <h5><strong>Vaccine Schedule</strong></h5>
-        <a href="{{ route('dashboard') }}" class="active">Beranda</a>
-        <a href="{{ route('menu-vaksin') }}">Tambah Vaksin</a>
-        <a href="{{ route('profil') }}">Profil</a>
-        <a href="{{ route('notifikasi') }}">Notifikasi</a>
-        <a href="{{ route('riwayat') }}">Riwayat</a>
-        <a href="#">Keluar</a>
+
+        <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'active' : '' }}">Beranda</a>
+        <a href="{{ route('menu-vaksin') }}" class="{{ request()->routeIs('menu-vaksin') ? 'active' : '' }}">Tambah Vaksin</a>
+        <a href="{{ route('profil') }}" class="{{ request()->routeIs('profil') ? 'active' : '' }}">Profil</a>
+        <a href="{{ route('notifikasi') }}" class="{{ request()->routeIs('notifikasi') ? 'active' : '' }}">Notifikasi</a>
+        <a href="{{ route('riwayat') }}" class="{{ request()->routeIs('riwayat') ? 'active' : '' }}">Riwayat</a>
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Keluar</a>
+
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
     </div>
+    
     <div class="flex-grow-1 p-4">
         @yield('content')
         <div class="footer mt-5">

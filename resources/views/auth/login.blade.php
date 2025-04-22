@@ -7,10 +7,18 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: #ffc9d1;
             margin: 0;
-            padding: 0;
+            font-family: 'Inter', sans-serif;
+            background: url('{{ asset('images/bg.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
         }
 
         .container {
@@ -28,6 +36,12 @@
             box-shadow: 0 4px 8px rgba(0,0,0,0.1);
             text-align: center;
         }
+        .login-box .register {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #000; /* Tambahkan ini supaya tulisan jadi hitam */
+}
+
 
         .login-box img {
             width: 100px;
@@ -98,7 +112,7 @@
             <button type="submit">Masuk</button>
         </form>
 
-        <div class="register">
+        <div class="register" background=red>
             Belum punya akun? <a href="{{ route('register') }}">Daftar</a>
         </div>
     </div>

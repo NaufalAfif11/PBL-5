@@ -5,10 +5,19 @@
     <title>Registrasi - Vaccine Schedule</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
+         body {
             margin: 0;
-            background-color: #ffc9d1;
             font-family: 'Inter', sans-serif;
+            background: url('{{ asset('images/bg.jpg') }}') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+            position: relative;
         }
 
         .container {
