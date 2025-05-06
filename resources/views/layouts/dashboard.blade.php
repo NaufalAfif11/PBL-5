@@ -55,6 +55,7 @@
         </form>
     </div>
     
+    
     <div class="flex-grow-1 p-4">
         @yield('content')
         <div class="footer mt-5">

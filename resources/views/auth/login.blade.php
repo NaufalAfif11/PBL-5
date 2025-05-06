@@ -1,121 +1,59 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Vaccine Schedule</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif;
-            background: url('{{ asset('images/bg.jpg') }}') no-repeat center center fixed;
-            background-size: cover;
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            padding: 20px;
-            position: relative;
-        }
+<x-guest-layout>
+    <div class="fixed inset-0 bg-cover bg-center overflow-hidden" style="background-image: url('{{ asset('images/bg.jpg') }}');">
+        <div class="absolute inset-0 bg-black opacity-60"></div> {{-- Optional: Overlay gelap agar teks lebih mudah dibaca --}}
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
+                <x-auth-session-status class="mb-4" :status="session('status')" />
 
-        .container {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
 
-        .login-box {
-            background-color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            width: 350px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .login-box .register {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #000; /* Tambahkan ini supaya tulisan jadi hitam */
-}
+                    <div>
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div>
 
+                    <div class="mt-4">
+                        <x-input-label for="password" :value="__('Password')" />
+                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="current-password" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
 
-        .login-box img {
-            width: 100px;
-            margin-bottom: 15px;
-        }
+                    <div class="block mt-4">
+                        <label for="remember_me" class="inline-flex items-center">
+                            <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
+                            <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
+                        </label>
+                    </div>
+                    <div class="text-center mt-6 text-sm text-gray-600">
+                    Sudah punya akun?
+                    <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
+                        Masuk
+                    </a><div class="text-center mt-6 text-sm text-gray-600">
+                    Lupa Password?
+                    <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
+Daftar                    </a>
+                </div>
+                
 
-        .login-box h2 {
-            color: #ff1f4b;
-            margin-bottom: 10px;
-        }
+                    <div class="flex items-center justify-end mt-4">
+                        @if (Route::has('password.request'))
+                        <div class="text-center mt-6 text-sm text-gray-600">
+                    
+                    <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
+                        
+                    </a>
+                </div>
+                        @endif
+</div>
 
-        .login-box h3 {
-            color: #cc0033;
-            margin-bottom: 20px;
-        }
-
-        .login-box input[type="text"],
-        .login-box input[type="password"] {
-            width: 100%;
-            padding: 10px;
-            margin-top: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ddd;
-            border-radius: 6px;
-        }
-
-        .login-box button {
-            background-color: #ff5a5f;
-            border: none;
-            padding: 10px;
-            color: white;
-            font-weight: bold;
-            width: 100%;
-            border-radius: 6px;
-            cursor: pointer;
-        }
-
-        .login-box button:hover {
-            background-color: #e6484f;
-        }
-
-        .login-box .register {
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .login-box .register a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .login-box .register a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="login-box">
-        <img src="{{ asset('images/logo.png') }}" alt="Logo">
-        <h2>Vaccine Schedule</h2>
-        <h3>Masuk</h3>
-
-        <!-- Arahkan ke dashboard -->
-        <form method="GET" action="{{ route('dashboard') }}">
-            <input type="text" name="email" placeholder="Nama Pengguna" required>
-            <input type="password" name="password" placeholder="Kata Sandi" required>
-            <button type="submit">Masuk</button>
-        </form>
-
-        <div class="register" background=red>
-            Belum punya akun? <a href="{{ route('register') }}">Daftar</a>
+                        <x-primary-button class="ms-3">
+                            {{ __('Log in') }}
+                        </x-primary-button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
-</body>
-</html>
+</x-guest-layout>

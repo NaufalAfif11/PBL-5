@@ -9,8 +9,6 @@
         body {
             margin: 0;
             font-family: 'Inter', sans-serif;
-            background: url('{{ asset('images/bg.jpg') }}') no-repeat center center fixed;
-            background-size: cover;
             color: white;
             min-height: 100vh;
             display: flex;
@@ -19,6 +17,17 @@
             text-align: center;
             padding: 20px;
             position: relative;
+            overflow: hidden; /* Ensure no scrollbar appears */
+        }
+        /* Background video style */
+        .background-video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1; /* Make sure it's behind the content */
         }
         .overlay {
             background-color: rgba(0, 0, 0, 0.5);
@@ -28,7 +37,7 @@
             width: 100%;
         }
         .logo {
-            width: 150px; /* ubah dari 100px ke 150px */
+            width: 150px; /* Change from 100px to 150px */
             margin-bottom: 30px;
         }
         h1 {
@@ -65,6 +74,12 @@
     </style>
 </head>
 <body>
+    <!-- Background Video -->
+    <video class="background-video" autoplay muted loop>
+        <source src="{{ asset('videos/VaksinOpen.mp4') }}" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+
     <div class="overlay">
         <img src="{{ asset('images/ss.png') }}" alt="Logo" class="logo">
         <h1>Vaccine Schedule</h1>

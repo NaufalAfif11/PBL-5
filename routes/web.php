@@ -1,42 +1,29 @@
 <?php
 
-// routes/web.php
-use App\Http\Controllers\AuthController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\NotifikasiController;
+use App\Http\Controllers\RiwayatController;
+use App\Http\Controllers\Vaksin\MenuVaksinController;
+use App\Http\Controllers\ProfilController; // <== tambahkan ini
 use Illuminate\Support\Facades\Route;
 
-
-Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
-Route::post('/login', [AuthController::class, 'login']);
-Route::get('/dashboard', [AuthController::class, 'dashboard'])->middleware('auth')->name('dashboard');
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-
 Route::get('/', function () {
-    return view('welcome'); // atau view lain seperti 'login' jika kamu ubah
+    return view('welcome');
 });
-
-Route::get('/menu-vaksin', [VaksinController::class, 'index'])->name('menu.vaksin');
-
-Route::get('/profil', [UserController::class, 'profil'])->name('profil');
-
-Route::get('/profil', [UserController::class, 'profil'])->name('profil');
-
-Route::get('/register', function () {
-    return view('auth.register'); // sesuaikan juga
-})->name('register');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
 
-//Demo Frontend
-Route::view('/register', 'auth.register')->name('register');
-Route::view('/login', 'auth.login')->name('login');
-Route::view('/dashboard', 'dashboard')->name('dashboard');
-Route::view('/menu-vaksin', 'menu-vaksin')->name('menu-vaksin');
-Route::view('/profil', 'profil')->name('profil');
-Route::view('/notifikasi', 'notifikasi')->name('notifikasi');
-Route::view('/riwayat', 'riwayat')->name('riwayat');
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 
+    Route::get('/menu-vaksin', [MenuVaksinController::class, 'index'])->name('menu-vaksin');
+    Route::get('/profil', [ProfilController::class, 'index'])->name('profil');
+    Route::get('/notifikasi', [NotifikasiController::class, 'index'])->name('notifikasi');
+    Route::get('/riwayat', [RiwayatController::class, 'index'])->name('riwayat');
+});
 
 require __DIR__.'/auth.php';

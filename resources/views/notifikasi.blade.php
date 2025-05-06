@@ -1,55 +1,46 @@
-@extends('layouts.dashboard')
+<x-app-layout>
+    <div class="flex">
+        <div class="w-64 bg-white h-screen p-4 shadow">
+            <img src="{{ asset('images/logo.png') }}" alt="logo" class="w-24 mx-auto mb-4">
+            <h5 class="text-center font-bold">Vaccine Schedule</h5>
 
-@section('content')
-<div class="min-h-screen flex">
-    <main class="flex-1 bg-pink-100 p-10">
-        <h1 class="text-3xl font-bold mb-6 text-red-600">Notifikasi</h1>
-
-        
-        <div class="bg-white rounded shadow overflow-x-auto">
-            <table class="min-w-full text-sm text-center">
-                <thead class="bg-pink-300 text-black">
-                    <tr>
-                        
-                    </tr>
-                    <tbody class="bg-white divide-y divide-pink-100">
-                    
-                        <tr class="hover:bg-pink-50">
-                            
-                            
-                            <td class="px-4 py-2 space-x-2">
-                                
-                                
-                            </td>
-                        </tr>
-                    
-                        <tr>
-                            <td colspan="8" class="px-4 py-4 text-center text-sm text-gray-500">Tidak Ada Notifikasi.</td>
-                        </tr>
-                    
-                </tbody>
-                </thead>
-                <tbody class="bg-white">
-                    {{-- Baris data vaksin akan ditampilkan di sini --}}
-                </tbody>
-            </table>
-        </div><div class="space-y-4">
-            {{-- Contoh notifikasi (hapus bagian ini saat sudah ada data dari backend) --}}
-            {{-- 
-            <div class="bg-white p-4 rounded shadow">
-                <div class="flex justify-between items-start">
-                    <div>
-                        <div class="text-lg font-semibold">Judul Notifikasi</div>
-                        <div class="text-sm text-gray-500">12 Apr 2025, 10:00</div>
-                        <p class="mt-2 text-gray-700">Pesan dari notifikasi ini akan ditampilkan di sini.</p>
-                    </div>
-                    <button class="bg-red-500 text-white px-3 py-1 rounded text-sm">Hapus</button>
-                </div>
-            </div>
-            --}}
+            <nav class="mt-6 space-y-2">
+                <a href="{{ route('dashboard') }}" class="{{ request()->routeIs('dashboard') ? 'bg-red-500 text-white' : 'text-black' }} block py-2 px-4 rounded">Beranda</a>
+                <a href="{{ route('menu-vaksin') }}" class="{{ request()->routeIs('menu-vaksin') ? 'bg-red-500 text-white' : 'text-black' }} block py-2 px-4 rounded">Tambah Vaksin</a>
+                <a href="{{ route('profil') }}" class="{{ request()->routeIs('profil') ? 'bg-red-500 text-white' : 'text-black' }} block py-2 px-4 rounded">Profil</a>
+                <a href="{{ route('notifikasi') }}" class="{{ request()->routeIs('notifikasi') ? 'bg-red-500 text-white' : 'text-black' }} block py-2 px-4 rounded">Notifikasi</a>
+                <a href="{{ route('riwayat') }}" class="{{ request()->routeIs('riwayat') ? 'bg-red-500 text-white' : 'text-black' }} block py-2 px-4 rounded">Riwayat</a>
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="text-black block py-2 px-4 rounded">Keluar</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" class="hidden">
+                    @csrf
+                </form>
+            </nav>
         </div>
 
-        
-    </main>
-</div>
-@endsection
+        <div class="flex-grow bg-pink-200 p-6">
+            <h1 class="text-3xl font-bold mb-6 text-red-600">Notifikasi</h1>
+
+            <div class="bg-white rounded shadow overflow-x-auto">
+                <table class="min-w-full text-sm text-center">
+                    <thead class="bg-pink-300 text-black">
+                        <tr>
+                            <th class="px-4 py-2">Judul</th>
+                            <th class="px-4 py-2">Pesan</th>
+                            <th class="px-4 py-2">Tanggal</th>
+                            <th class="px-4 py-2">Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody class="bg-white divide-y divide-pink-100">
+                        <tr>
+                            <td colspan="4" class="px-4 py-4 text-center text-sm text-gray-500">Tidak Ada Notifikasi.</td>
+                        </tr>
+                        {{-- Data notifikasi akan ditampilkan di sini --}}
+                    </tbody>
+                </table>
+            </div>
+            <div class="mt-10 text-center text-red-600 font-bold">
+                © 2025 Vaccine Schedule. All rights reserved.
+            </div>
+        </div>
+    </div>
+</x-app-layout>
