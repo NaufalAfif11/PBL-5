@@ -5,7 +5,7 @@
             <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
                 <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Registrasi Akun</h2>
 
-                <form method="POST" action="{{ route('register') }}" class="space-y-5">
+                <form method="POST" action="{{ route('register') }}" class="space-y-5" id="registrationForm">
                     @csrf
 
                     <div>
@@ -32,8 +32,16 @@
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
 
+                    <div class="form-group">
+                        <x-input-label for="role" :value="__('Daftar Sebagai')" />
+                        <select class="form-control block mt-1 w-full border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm" id="role" name="role">
+                            <option value="pasien">Pasien</option>
+                            <option value="dokter">Dokter</option>
+                        </select>
+                    </div>
+
                     <div>
-                        <x-primary-button class="w-full">
+                        <x-primary-button class="w-full" id="registerButton">
                             {{ __('Daftar') }}
                         </x-primary-button>
                     </div>
@@ -48,4 +56,27 @@
             </div>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const registerButton = document.getElementById('registerButton');
+            const roleSelect = document.getElementById('role');
+            const form = document.getElementById('registrationForm');
+
+            registerButton.addEventListener('click', function (event) {
+                event.preventDefault(); // Prevent default form submission
+
+                const selectedRole = roleSelect.value;
+
+                if (selectedRole === 'dokter') {
+                    window.location.href = '/dokter/dashboard';
+                } else if (selectedRole === 'pasien') {
+                    window.location.href = '/dashboard';
+                } else {
+                    // Jika role tidak dipilih atau nilai lain, submit form biasa
+                    form.submit();
+                }
+            });
+        });
+    </script>
 </x-guest-layout>

@@ -29,7 +29,6 @@
                             <th class="px-4 py-2">Nama Vaksin</th>
                             <th class="px-4 py-2">Tanggal</th>
                             <th class="px-4 py-2">Nama Dokter</th>
-                            <th class="px-4 py-2">Alamat</th>
                             <th class="px-4 py-2">Status</th>
                             <th class="px-4 py-2">Aksi</th>
                         </tr>
@@ -73,17 +72,9 @@
                 </div>
 
                 <div class="mb-4">
-                    <label for="patientAddress" class="block text-sm font-medium text-gray-700">Alamat</label>
-                    <input type="text" id="patientAddress" name="patientAddress" class="w-full px-4 py-2 border rounded-lg focus:ring-red-500 focus:border-red-500" placeholder="Alamat Pasien">
-                </div>
-
-                <div class="mb-4">
                     <label for="status" class="block text-sm font-medium text-gray-700">Status</label>
                     <select id="status" name="status" class="w-full px-4 py-2 border rounded-lg focus:ring-red-500 focus:border-red-500">
                         <option value="pending">Pending</option>
-                        <option value="completed">Completed</option>
-                        <option value="canceled">Canceled</option>
-                        <option value="scheduled">Scheduled</option>
                     </select>
                 </div>
 
@@ -116,7 +107,6 @@
             const vaccineName = document.getElementById('vaccineName').value;
             const doctorName = document.getElementById('doctorName').value;
             const vaccineDate = document.getElementById('vaccineDate').value;
-            const patientAddress = document.getElementById('patientAddress').value;
             const status = document.getElementById('status').value;
 
             const newRow = document.createElement('tr');
@@ -127,7 +117,6 @@
                 <td class="px-4 py-2">${vaccineName}</td>
                 <td class="px-4 py-2">${vaccineDate}</td>
                 <td class="px-4 py-2">${doctorName}</td>
-                <td class="px-4 py-2">${patientAddress}</td>
                 <td class="px-4 py-2">${status}</td>
                 <td class="px-4 py-2">
                     <button class="deleteBtn bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 focus:outline-none focus:ring-2 focus:ring-red-500">Hapus</button>

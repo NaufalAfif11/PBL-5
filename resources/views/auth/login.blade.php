@@ -27,13 +27,13 @@
                         </label>
                     </div>
                     <div class="text-center mt-6 text-sm text-gray-600">
-                    Sudah punya akun?
-                    <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
-                        Masuk
+                    Belum punya akun?
+                    <a href="{{ route('register') }}" class="text-indigo-600 hover:underline font-semibold">
+                        Daftar
                     </a><div class="text-center mt-6 text-sm text-gray-600">
-                    Lupa Password?
+                    
                     <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
-Daftar                    </a>
+                    Lupa Password?                    </a>
                 </div>
                 
 
