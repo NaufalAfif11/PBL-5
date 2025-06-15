@@ -18,9 +18,11 @@ class User extends Authenticatable
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'name', // <--- ENSURE 'name' IS HERE
         'email',
         'password',
+        'username', // <--- ENSURE 'username' IS HERE IF YOU HAVE THAT COLUMN
+        'tanggal_lahir', // <--- ENSURE 'tanggal_lahir' IS HERE IF YOU HAVE THAT COLUMN
     ];
 
     /**

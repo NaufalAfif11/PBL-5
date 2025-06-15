@@ -1,105 +1,51 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <title>Registrasi - Vaccine Schedule</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        body {
-            margin: 0;
-            background-color: #ffc9d1;
-            font-family: 'Inter', sans-serif;
-        }
+<x-guest-layout>
+    <div class="fixed inset-0 bg-cover bg-center overflow-hidden" style="background-image: url('{{ asset('images/bg.jpg') }}');">
+        <div class="absolute inset-0 bg-black opacity-60"></div>
+        <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
+            <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
+                <h2 class="text-3xl font-bold text-center text-gray-800 mb-6">Registrasi Akun</h2>
 
-        .container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+                <form method="POST" action="{{ route('register') }}" class="space-y-5">
+                    @csrf
 
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            width: 350px;
-            box-shadow: 4px 6px 8px rgba(0,0,0,0.1);
-        }
+                    <div>
+                        <x-input-label for="name" :value="__('Nama Lengkap')" />
+                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        <x-input-error :messages="$errors->get('name')" class="mt-2" />
+                    </div>
 
-        .card h2 {
-            text-align: center;
-            margin-bottom: 25px;
-        }
+                    <div>
+                        <x-input-label for="email" :value="__('Email')" />
+                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" />
+                        <x-input-error :messages="$errors->get('email')" class="mt-2" />
+                    </div>
 
-        .form-group {
-            margin-bottom: 15px;
-        }
+                    <div>
+                        <x-input-label for="password" :value="__('Kata Sandi')" />
+                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password')" class="mt-2" />
+                    </div>
 
-        .form-group input {
-            width: 100%;
-            padding: 10px;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-        }
+                    <div>
+                        <x-input-label for="password_confirmation" :value="__('Konfirmasi Sandi')" />
+                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                        <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+                    </div>
 
-        .btn {
-            width: 100%;
-            padding: 10px;
-            background-color: #ff5a5f;
-            color: white;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            cursor: pointer;
-        }
+                    <div>
+                        <x-primary-button class="w-full">
+                            {{ __('Daftar') }}
+                        </x-primary-button>
+                    </div>
+                </form>
 
-        .btn:hover {
-            background-color: #e6484f;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 15px;
-            font-size: 14px;
-        }
-
-        .login-link a {
-            color: #007bff;
-            text-decoration: none;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-    </style>
-</head>
-<body>
-<div class="container">
-    <div class="card">
-        <h2>Registrasi</h2>
-        <form action="{{ route('login') }}" method="GET">
-            <div class="form-group">
-                <input type="text" name="name" placeholder="Nama Pengguna" required>
+                <div class="text-center mt-6 text-sm text-gray-600">
+                    Sudah punya akun?
+                    <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
+                        Masuk
+                    </a>
+                </div>
             </div>
-            <div class="form-group">
-                <input type="email" name="email" placeholder="Email" required>
-            </div>
-            <div class="form-group">
-                <input type="date" name="birthdate" placeholder="Tanggal Lahir" required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password" placeholder="Kata Sandi" required>
-            </div>
-            <div class="form-group">
-                <input type="password" name="password_confirmation" placeholder="Konfirmasi Kata Sandi" required>
-            </div>
-            <button type="submit" class="btn">Daftar</button>
-        </form>
-
-        <div class="login-link">
-            Sudah punya akun? <a href="{{ route('login') }}">Masuk</a>
         </div>
     </div>
-</div>
-</body>
-</html>
+</x-guest-layout>
