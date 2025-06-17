@@ -51,7 +51,7 @@ Route::get('/dokter/notifikasi', [NotifikasiController::class, 'index'])->name('
 
     Route::get('/dokter', function () {
         $notifications = Notification::all(); // Sesuaikan jika hanya milik dokter
-        return view('dokter.dashboard', compact('notifications'));
+        return view('dashboard', compact('notifications'));
     })->name('dokter.dashboard');
 
     Route::get('/pasien', function () {
@@ -59,6 +59,15 @@ Route::get('/dokter/notifikasi', [NotifikasiController::class, 'index'])->name('
         return view('dashboard', compact('notifications')); // Atau view pasien khusus
     })->name('pasien.dashboard');
 });
+Route::get('/dashboard', function () {
+    $role = auth()->user()->role;
+    if ($role === 'dokter') {
+        $notifications = \App\Models\Notification::all(); // atau filter berdasarkan dokter_id
+    } else {
+        $notifications = \App\Models\Notification::where('user_id', auth()->id())->get();
+    }
+    return view('dashboard', compact('notifications'));
+})->name('dashboard');
 
 // Post vaksin (dari form)
 Route::post('/vaksin', [VaccineController::class, 'store'])->name('vaksin.store');

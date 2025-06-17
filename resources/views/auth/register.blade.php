@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="fixed inset-0 bg-cover bg-center overflow-hidden" style="background-image: url('{{ asset('images/bg.jpg') }}');">
+    <div class="fixed inset-0 bg-cover bg-center overflow-hidden" style="background-image: url('{{ asset('images/bg.png') }}');">
         <div class="absolute inset-0 bg-black opacity-60"></div>
         <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
             <div class="bg-white/90 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">
@@ -39,7 +39,6 @@
                             <option value="">-- Pilih Peran --</option>
                             <option value="pasien">Pasien</option>
                             <option value="dokter">Dokter</option>
-                            <option value="dokter">Admin</option>
                         </select>
                         <x-input-error :messages="$errors->get('role')" class="mt-2" />
                     </div>

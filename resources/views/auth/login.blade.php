@@ -1,5 +1,5 @@
 <x-guest-layout>
-    <div class="fixed inset-0 bg-cover bg-center overflow-hidden" style="background-image: url('{{ asset('images/bg.jpg') }}');">
+    <div class="fixed inset-0 bg-cover bg-center overflow-hidden" style="background-image: url('{{ asset('images/bg.png') }}');">
         <div class="absolute inset-0 bg-black opacity-60"></div> {{-- Optional: Overlay gelap agar teks lebih mudah dibaca --}}
         <div class="relative z-10 flex items-center justify-center min-h-screen p-4">
             <div class="bg-white/80 backdrop-blur-md p-8 rounded-2xl shadow-2xl w-full max-w-md">

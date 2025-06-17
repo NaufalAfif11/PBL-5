@@ -33,22 +33,21 @@
                     Your browser does not support the video tag.
                 </video>
             </div>
-
-            @php $role = Auth::user()->role; @endphp
-
             <!-- Timeline Vaksinasi -->
             <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md mb-10">
                 <h3 class="text-lg font-semibold text-red-600 mb-4">Timeline Vaksinasi</h3>
                 <div class="overflow-x-auto">
                     <table class="min-w-full bg-white border border-gray-300 rounded-lg">
                         <thead>
-                            <tr class="bg-pink-100 text-left text-sm text-red-600">
-                                <th class="py-2 px-4 border-b">Tanggal</th>
-                                <th class="py-2 px-4 border-b">Nama Vaksin</th>
-                                <th class="py-2 px-4 border-b">Nama Dokter</th>
-                                <th class="py-2 px-4 border-b">Status</th>
-                            </tr>
-                        </thead>
+    <tr class="bg-pink-100 text-left text-sm text-red-600">
+        <th class="py-2 px-4 border-b">Tanggal</th>
+        <th class="py-2 px-4 border-b">Nama Vaksin</th>
+        <th class="py-2 px-4 border-b">Nama Dokter</th>
+        <th class="py-2 px-4 border-b">Nama Pasien</th>
+        <th class="py-2 px-4 border-b">Status</th>
+    </tr>
+</thead>
+
                         <tbody id="vaccineTimeline">
                             <!-- Diisi oleh JavaScript -->
                         </tbody>
@@ -65,33 +64,45 @@
 
     <!-- Script -->
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            const role = @json(Auth::user()->role);
+document.addEventListener('DOMContentLoaded', function () {
+    const tableBody = document.getElementById('vaccineTimeline');
+    const role = "{{ Auth::user()->role }}";
+    const email = "{{ Auth::user()->email }}";
+    const keyNotif = "vaccineNotifications";
 
-            if (role === 'pasien') {
-                const tableBody = document.getElementById('vaccineTimeline');
-                const data = JSON.parse(localStorage.getItem('vaccineNotifications')) || [];
+    let data = JSON.parse(localStorage.getItem(keyNotif)) || [];
 
-                if (data.length === 0) {
-                    tableBody.innerHTML = `<tr><td colspan="4" class="py-2 px-4 text-center text-gray-600">Belum ada vaksin yang dijadwalkan.</td></tr>`;
-                    return;
-                }
+    if (data.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="5" class="py-2 px-4 text-center text-gray-600">Belum ada vaksin yang dijadwalkan.</td></tr>`;
+        return;
+    }
 
-                data.sort((a, b) => new Date(a.vaccineDate) - new Date(b.vaccineDate));
+    // Urutkan berdasarkan tanggal
+    data.sort((a, b) => new Date(a.vaccineDate) - new Date(b.vaccineDate));
 
-                data.forEach(item => {
-                    const row = document.createElement('tr');
-                    row.innerHTML = `
-                        <td class="py-2 px-4 border-b">${item.vaccineDate}</td>
-                        <td class="py-2 px-4 border-b">${item.vaccineName}</td>
-                        <td class="py-2 px-4 border-b">${item.doctorName}</td>
-                        <td class="py-2 px-4 border-b">
-                            <span class="inline-block bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded">${item.status}</span>
-                        </td>
-                    `;
-                    tableBody.appendChild(row);
-                });
-            }
-        });
-    </script>
+    // Filter sesuai role
+    let filteredData = [];
+    if (role === 'dokter') {
+        filteredData = data;
+    } else {
+        filteredData = data.filter(item => item.patientEmail === email);
+    }
+
+    filteredData.forEach(item => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+            <td class="py-2 px-4 border-b">${item.vaccineDate}</td>
+            <td class="py-2 px-4 border-b">${item.vaccineName}</td>
+            <td class="py-2 px-4 border-b">${item.doctorName}</td>
+            <td class="py-2 px-4 border-b">${item.patientEmail}</td>
+            <td class="py-2 px-4 border-b">
+                <span class="inline-block bg-yellow-200 text-yellow-800 text-xs px-2 py-1 rounded">${item.status || 'Belum'}</span>
+            </td>
+        `;
+        tableBody.appendChild(row);
+    });
+});
+</script>
+
+
 </x-app-layout>
