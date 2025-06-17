@@ -2,22 +2,32 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\Vaccine; // Import your Vaccine model
 
-class DatabaseSeeder extends Seeder
+class VaccineSeeder extends Seeder
 {
     /**
-     * Seed the application's database.
+     * Run the database seeds.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        // Define the list of vaccine names to be seeded
+        $vaccines = [
+            ['name' => 'Vaksin A'],
+            ['name' => 'Vaksin B'],
+            ['name' => 'Vaksin C'],
+            ['name' => 'Vaksin D'],
+            ['name' => 'Vaksin E'],
+        ];
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Loop through each vaccine and create it if it doesn't already exist
+        // Using firstOrCreate prevents duplicate entries if the seeder is run multiple times
+        foreach ($vaccines as $vaccine) {
+            Vaccine::firstOrCreate(
+                ['name' => $vaccine['name']]
+            );
+        }
     }
 }

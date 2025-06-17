@@ -16,7 +16,6 @@ return new class extends Migration
         $table->string('vaccine_name');
         $table->string('doctor_name');
         $table->date('vaccine_date');
-        $table->string('patient_address');
         $table->timestamps();
     });
 }

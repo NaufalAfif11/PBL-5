@@ -3,14 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Notification; // <-- Move this line here!
+use App\Models\Notification;
 
-class NotificationController extends Controller
+class NotifikasiController extends Controller
 {
     public function index()
     {
-        // Now, 'Notification' here correctly refers to your imported model class
         $notifications = Notification::all();
-        return view('notifikasi.index', compact('notifications'));
+        return view('dokter.notifikasi', compact('notifications'));
     }
 }

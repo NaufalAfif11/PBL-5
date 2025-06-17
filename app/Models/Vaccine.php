@@ -7,10 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Vaccine extends Model
 {
     protected $fillable = [
-    'vaccine_name',
-    'doctor_name',
-    'vaccine_date',
-    'patient_address',
-];
-//
+        'vaccine_name',
+        'vaccine_date',
+        'doctor_name',
+    ];
 }

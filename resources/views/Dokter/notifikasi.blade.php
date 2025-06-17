@@ -35,10 +35,8 @@
             <td class="px-4 py-2">{{ $notif->vaccine_date }}</td>
             <td class="px-4 py-2">{{ $notif->queue }}</td>
             <td class="px-4 py-2">
-                <button 
-                    onclick="showDetailModal(@json($notif))"
-                    class="detailBtn bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-blue-700"
-                >
+                <button onclick="showDetailModal(@json($notif))"
+                        class="detailBtn bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
                     Detail
                 </button>
             </td>
@@ -49,6 +47,7 @@
         </tr>
     @endforelse
 </tbody>
+
 
                 </table>
             </div>
@@ -233,6 +232,31 @@
         });
 
         // Load notifications when the page loads
-        document.addEventListener('DOMContentLoaded', loadNotifications);
+document.addEventListener('DOMContentLoaded', loadNotifications);
+
+function loadNotifications() {
+    const notificationTableBody = document.getElementById('notificationTableBody');
+    notificationTableBody.innerHTML = ''; // kosongkan
+
+    const storedNotifications = JSON.parse(localStorage.getItem('vaccineNotifications')) || [];
+
+    storedNotifications.forEach((notification) => {
+        const newRow = document.createElement('tr');
+        newRow.classList.add('hover:bg-pink-50');
+
+        newRow.innerHTML = `
+            <td class="px-4 py-2">${notification.vaccineName}</td>
+            <td class="px-4 py-2">${notification.vaccineDate}</td>
+            <td class="px-4 py-2">${notification.queue}</td>
+            <td class="px-4 py-2">
+                <button onclick="showDetailModal(${JSON.stringify(notification).replace(/"/g, '&quot;')})"
+                    class="bg-pink-500 text-white px-4 py-2 rounded-md hover:bg-blue-700">
+                    Detail
+                </button>
+            </td>
+        `;
+        notificationTableBody.appendChild(newRow);
+    });
+    }    
     </script>
 </x-app-layout>

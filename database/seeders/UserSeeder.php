@@ -1,9 +1,8 @@
 <?php
 
-namespace Database\Seeders;
-
 use Illuminate\Database\Seeder;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 
 class UserSeeder extends Seeder
 {
@@ -11,10 +10,23 @@ class UserSeeder extends Seeder
     {
         User::create([
             'name' => 'Admin',
-            'username' => 'admin', // tambahin ini
             'email' => 'admin@example.com',
-            'password' => bcrypt('password123'),
+            'password' => Hash::make('password'),
+            'role' => 'admin',
         ]);
-        
+
+        User::create([
+            'name' => 'Dokter 1',
+            'email' => 'dokter@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'dokter',
+        ]);
+
+        User::create([
+            'name' => 'Pasien 1',
+            'email' => 'pasien@example.com',
+            'password' => Hash::make('password'),
+            'role' => 'pasien',
+        ]);
     }
 }
