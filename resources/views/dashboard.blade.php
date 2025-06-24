@@ -26,13 +26,8 @@
             <h1 class="text-3xl font-bold mb-4">Dashboard</h1>
             <h2 class="text-2xl font-semibold text-red-600 mb-5">Selamat Datang, {{ Auth::user()->name }}</h2>
 
-            <!-- Video Section -->
-            <div class="rounded-lg mb-10">
-                <video controls autoplay loop class="w-80 h-48">
-                    <source src="{{ asset('videos/vaksinvid.mp4') }}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+        
+
             <!-- Timeline Vaksinasi -->
             <div class="w-full max-w-4xl bg-white p-6 rounded-lg shadow-md mb-10">
                 <h3 class="text-lg font-semibold text-red-600 mb-4">Timeline Vaksinasi</h3>

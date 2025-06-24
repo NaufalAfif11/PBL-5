@@ -15,23 +15,6 @@
                     <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard')">
                         {{ __('Vaccine Schedule') }}
                     </x-nav-link>
-
-                    {{-- Role-based Navigation --}}
-                    @auth
-                        @if (Auth::user()->role === 'admin')
-                            <x-nav-link :href="route('admin.dashboard')" :active="request()->routeIs('admin.dashboard')">
-                                {{ __('Dashboard Admin') }}
-                            </x-nav-link>
-                        @elseif (Auth::user()->role === 'dokter')
-                            <x-nav-link :href="route('dokter.dashboard')" :active="request()->routeIs('dokter.dashboard')">
-                                {{ __('Dashboard Dokter') }}
-                            </x-nav-link>
-                        @elseif (Auth::user()->role === 'pasien')
-                            <x-nav-link :href="route('pasien.dashboard')" :active="request()->routeIs('pasien.dashboard')">
-                                {{ __('Dashboard Pasien') }}
-                            </x-nav-link>
-                        @endif
-                    @endauth
                 </div>
             </div>
 
