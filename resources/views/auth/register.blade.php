@@ -10,32 +10,31 @@
 
                     <div>
                         <x-input-label for="name" :value="__('Nama Lengkap')" />
-                        <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
+                        <x-text-input id="name" class="block mt-1 w-full border-pink-500 focus:border-pink-600 focus:ring-pink-600" type="text" name="name" :value="old('name')" required autofocus autocomplete="name" />
                         <x-input-error :messages="$errors->get('name')" class="mt-2" />
                     </div>
-                    
 
                     <div>
-                        
                         <x-input-label for="email" :value="__('Email')" />
-                        <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autocomplete="email" />
+                        <x-text-input id="email" class="block mt-1 w-full border-pink-500 focus:border-pink-600 focus:ring-pink-600" type="email" name="email" :value="old('email')" required autocomplete="email" />
                         <x-input-error :messages="$errors->get('email')" class="mt-2" />
                     </div>
 
                     <div>
                         <x-input-label for="password" :value="__('Kata Sandi')" />
-                        <x-text-input id="password" class="block mt-1 w-full" type="password" name="password" required autocomplete="new-password" />
+                        <x-text-input id="password" class="block mt-1 w-full border-pink-500 focus:border-pink-600 focus:ring-pink-600" type="password" name="password" required autocomplete="new-password" />
                         <x-input-error :messages="$errors->get('password')" class="mt-2" />
                     </div>
 
                     <div>
                         <x-input-label for="password_confirmation" :value="__('Konfirmasi Sandi')" />
-                        <x-text-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" required autocomplete="new-password" />
+                        <x-text-input id="password_confirmation" class="block mt-1 w-full border-pink-500 focus:border-pink-600 focus:ring-pink-600" type="password" name="password_confirmation" required autocomplete="new-password" />
                         <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
                     </div>
+
                     <div class="mt-4">
                         <x-input-label for="role" :value="__('Pilih Peran')" />
-                        <select name="role" id="role" required class="block mt-1 w-full rounded-md border-gray-300 shadow-sm focus:ring-indigo-500 focus:border-indigo-500">
+                        <select name="role" id="role" required class="block mt-1 w-full rounded-md border-pink-500 shadow-sm focus:ring-pink-600 focus:border-pink-600">
                             <option value="">-- Pilih Peran --</option>
                             <option value="pasien">Pasien</option>
                             <option value="dokter">Dokter</option>
@@ -44,16 +43,15 @@
                     </div>
 
                     <div>
-                        <x-primary-button class="w-full">
+                        <button type="submit" class="w-full bg-pink-600 hover:bg-pink-700 text-white font-semibold py-2 px-4 rounded-md shadow focus:outline-none focus:ring-2 focus:ring-pink-400 focus:ring-offset-2 transition">
                             {{ __('Daftar') }}
-                        </x-primary-button>
+                        </button>
                     </div>
-                    
                 </form>
 
                 <div class="text-center mt-6 text-sm text-gray-600">
                     Sudah punya akun?
-                    <a href="{{ route('login') }}" class="text-indigo-600 hover:underline font-semibold">
+                    <a href="{{ route('login') }}" class="text-pink-600 hover:underline font-semibold">
                         Masuk
                     </a>
                 </div>

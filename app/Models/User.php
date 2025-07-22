@@ -47,4 +47,27 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+    public function jadwal()
+    {
+        return $this->hasMany(DokterJadwal::class, 'dokter_id');
+    }
+
+    public function vaksins()
+    {
+        return $this->hasMany(DokterVaksin::class, 'dokter_id');
+    }
+
+    public function availabilities()
+{
+    return $this->hasMany(Availability::class, 'doctor_id');
+}
+
+public function Vaksinasis()
+{
+    return $this->belongsToMany(Vaksinasi::class, 'doctor_vaccine');
+}
+
+
+
+
 }

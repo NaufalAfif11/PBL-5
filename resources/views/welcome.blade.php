@@ -124,7 +124,7 @@
             </div>
         </div>
 
-        <img src="{{ asset('images/ss.png') }}" alt="Vaccine Logo" class="logo-center">
+        <img src="{{ asset('images/logo.png') }}" alt="Vaccine Logo" class="logo-center">
     </div>
 </body>
 </html>

@@ -23,40 +23,31 @@ class AuthenticatedSessionController extends Controller
      * Menangani permintaan otentikasi yang masuk.
      */
     public function store(Request $request): RedirectResponse
-    {
-        // Validasi input email dan password
-        $request->validate([
-            'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'],
+{
+    $request->validate([
+        'email' => 'required|email',
+        'password' => 'required',
+    ]);
+
+    if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
+        throw ValidationException::withMessages([
+            'email' => __('auth.failed'),
         ]);
-
-        // Coba untuk mengotentikasi pengguna
-        if (! Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
-            // Jika otentikasi gagal, lempar pengecualian validasi
-            throw ValidationException::withMessages([
-                'email' => __('auth.failed'), // Pesan kesalahan dari file bahasa
-            ]);
-        }
-
-        // Regenerasi sesi untuk mencegah fiksasi sesi
-        $request->session()->regenerate();
-
-        // Dapatkan pengguna yang baru saja diotentikasi
-        $user = Auth::user();
-
-        // Redirect berdasarkan peran (role) pengguna
-        if ($user->role === 'admin') {
-            // Jika peran adalah 'admin', arahkan ke dashboard admin
-            return redirect()->route('admin.dashboard');
-        } elseif ($user->role === 'doctor') {
-            // Contoh: Jika peran adalah 'doctor', arahkan ke dashboard dokter
-            return redirect()->route('doctor.dashboard');
-        }
-        // Tambahkan kondisi lain untuk peran lain jika diperlukan
-
-        // Default: Jika tidak ada peran khusus yang cocok, arahkan ke halaman utama
-        return redirect()->intended('/');
     }
+
+    $request->session()->regenerate();
+
+    $role = Auth::user()->role;
+
+    if ($role === 'admin') {
+        return redirect('/admin');
+    } elseif ($role === 'dokter') {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/dashboard');
+    }
+}
+
 
     /**
      * Menghancurkan sesi terotentikasi.
