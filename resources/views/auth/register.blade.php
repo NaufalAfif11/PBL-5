@@ -37,7 +37,6 @@
                         <select name="role" id="role" required class="block mt-1 w-full rounded-md border-pink-500 shadow-sm focus:ring-pink-600 focus:border-pink-600">
                             <option value="">-- Pilih Peran --</option>
                             <option value="pasien">Pasien</option>
-                            <option value="dokter">Dokter</option>
                         </select>
                         <x-input-error :messages="$errors->get('role')" class="mt-2" />
                     </div>

@@ -130,9 +130,9 @@
                     <!-- Pilih Vaksin -->
                     <select name="vaccine_name" class="w-full border p-2 rounded" required>
                         <option value="">Pilih Vaksin...</option>
-                        <option value="vaksinA">Vaksin A</option>
-                        <option value="vaksinB">Vaksin B</option>
-                        <option value="vaksinC">Vaksin C</option>
+                        <option value="vaksinA">Vaksin Influenza</option>
+                        <option value="vaksinB">Vaksin Hepatitis</option>
+                        <option value="vaksinC">Vaksin Covovax</option>
                     </select>
 
                     <!-- Tampil ke user -->
